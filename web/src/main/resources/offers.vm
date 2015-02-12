@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Amazon Coupons: February 2015 Coupon Codes</title>
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="Find dozens of Amazon coupons, discount coupons, coupon codes, promo codes, and promotion codes for amazon.in" name="description">
+      <meta content="Amazon coupons, Amazon coupon codes, Amazon discounts, Amazon deals, Amazon promo codes, Amazon promotion codes, Amazon discount codes" name="keywords">
+      <link rel="stylesheet" type="text/css" href="/webjars/bootswatch/3.0.0/spacelab/bootstrap.min.css"/>
+      <link rel="stylesheet" type="text/css" href="/styles/style.css"/>
+      <script type="text/javascript" src="/webjars/jquery/1.8.3/jquery.min.js"></script>
+      <script type="text/javascript" src="/webjars/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="/webjars/jquery-cookie/1.3.1/jquery.cookie.js"></script>
+      <script type="text/javascript" src="/scripts/script.js"></script>
+   </head>
+   <body>
+      <div class="page-content dark">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-2">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <!-- STARTS HERE -->
+                        <div class="outlet-sidebar ">
+                           <div style="background-color: #1b2433" class="vendor-image shadow">
+                              <img class="col-md-12" alt="Flipkart" src="http://cdn01.coupondunia.in/sitespecific/media/generated/merchantlogos/logo_5972793_1.jpg?v=1416212070">
+                              <div class="image-sub" style="background-color: white"><a href="http://www.coupondunia.in/go/1/5972793">Flipkart</a></div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-12 margin-top-normal">
+                        <!--- FROM HERE -->
+                        <div class="filter-container searchable-filter">
+                           <div class="filter-header">Filter By Offer Type</div>
+                           <div class="filter-criterias">
+                              <div class="filter-content">
+                                 <form id="merchant-filters" onsubmit="return false();" data-action="">
+                                    <div class="filter-box">
+                                       <input type="checkbox" disabled="" class="" value="1" name="filter_a" id="Filter By Offer Type_0">
+                                       <label class="filter-label" for="Filter By Offer Type_0">Coupon (0)</label>
+                                    </div>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                        <!--- TO HERE -->
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-10">
+                  <div class="row padding-bottom-large margin-left-right-none">
+                     <h1>
+                        <span class="vendor-heading">
+                        Amazon	</span> <span class="vendor-heading-offer">
+                        Offers	</span> <span data-storeinfo="online_289" class="vendor-favourite no"></span>
+                     </h1>
+                  </div>
+                  #foreach( $offer in $offerList )
+                  <div class="row margin-left-right-none">
+                     <div id="c99352" data-couponid="99352" class="offer-big offer sms-parent col-24">
+                        <div class="col-md-8 ">
+                           <div class="offer-title" id="c99352">
+                              $offer.title + $offer.description 
+                           </div>
+                           <div class="offer-description">
+                           </div>
+                           <div class="offer-description-full">
+                           </div>
+                        </div>
+                        <div class="col-md-2 text-right omega">
+                           <div class="offer-getcode">
+                              <div data-url="http://www.coupondunia.in/load/99352/" data-code="" data-websiteid="289" data-websitename="Amazon" data-clickarea="HomeButton" data-coupontype="Deal" data-couponid="99352" class="btn btn-cd btn-deal coupon-click " id="c99352">Activate DEAL</div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  #end
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+      </div>
+   </body>
+</html>
