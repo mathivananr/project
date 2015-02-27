@@ -1,5 +1,9 @@
 body {
-    padding-top: 80px;
+    /* padding-top: 80px; */
+}
+
+.navbar-fixed-top {
+	position: relative;	
 }
 
 .navbar-brand {
@@ -277,4 +281,29 @@ span.pagelinks {
     background: url("") repeat-x scroll 50% 50% #CD0A0A;
     border: 1px solid #CD0A0A;
     color: #FFFFFF;
+}
+
+.navbar {
+    background-image: linear-gradient(#7be4ca, #7be4ca 50%, #7be4ca);
+    background-repeat: no-repeat;
+    border: 1px solid #d5d5d5;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+}
+
+.post {
+    border-color: #7be4ca;
+}
+
+.post-heading {
+    background-color: #7be4ca;
+    border-color: #7be4ca;
+    color: #fff;
 }

@@ -7,6 +7,6 @@
         <pattern>/merchant/*</pattern>
     </excludes> 
     <decorator name="default" page="default.jsp">
-        <pattern>/*</pattern>
+        <pattern>/admin*</pattern>
     </decorator>
 </decorators>
