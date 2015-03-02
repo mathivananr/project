@@ -9,5 +9,8 @@
         <mapping class="com.mycompany.model.User"/>
         <mapping class="com.mycompany.model.Role"/>
         <mapping class="com.mycompany.model.Offer"/>
+        <mapping class="com.mycompany.model.Post"/>
+        <mapping class="com.mycompany.model.Wow"/>
+        <mapping class="com.mycompany.model.Feel"/>
     </session-factory>
 </hibernate-configuration>

@@ -2,6 +2,7 @@ package com.mycompany.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -46,7 +47,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  *         by David Carter david@carter.net
  */
 @Entity
-@Table(name = "app_user")
+@Table(name = "mu_user")
 @Indexed
 @XmlRootElement
 public class User extends BaseObject implements Serializable, UserDetails {
@@ -69,6 +70,14 @@ public class User extends BaseObject implements Serializable, UserDetails {
     private boolean accountExpired;
     private boolean accountLocked;
     private boolean credentialsExpired;
+    private List<User> myFavourites = new ArrayList<User>();
+    private List<User> favouritesMe = new ArrayList<User>();
+    private int wowsCount;
+    private int feelsCount;
+    private int myFavoritesCount;
+    private int favoritesMeCount;
+    private Calendar createdOn;
+	private Calendar updatedOn;
 
     /**
      * Default constructor - creates a new instance with no values set.
@@ -166,7 +175,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)    
     @JoinTable(
-            name = "user_role",
+            name = "mu_user_role",
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
@@ -293,7 +302,85 @@ public class User extends BaseObject implements Serializable, UserDetails {
         this.lastName = lastName;
     }
 
-    public void setEmail(String email) {
+	@ManyToMany
+    @JoinTable(name="mu_favourites",
+     joinColumns=@JoinColumn(name="person_id"),
+     inverseJoinColumns=@JoinColumn(name="favourite_id")
+    )
+    public List<User> getMyFavourites() {
+		return myFavourites;
+	}
+
+	public void setMyFavourites(List<User> myFavourites) {
+		this.myFavourites = myFavourites;
+	}
+
+	@ManyToMany
+    @JoinTable(name="mu_favourites",
+     joinColumns=@JoinColumn(name="favourite_id"),
+     inverseJoinColumns=@JoinColumn(name="person_id")
+    )
+	public List<User> getFavouritesMe() {
+		return favouritesMe;
+	}
+
+	public void setFavouritesMe(List<User> favouritesMe) {
+		this.favouritesMe = favouritesMe;
+	}
+
+	@Column(columnDefinition = "int default 0")
+	public int getWowsCount() {
+		return wowsCount;
+	}
+
+	public void setWowsCount(int wowsCount) {
+		this.wowsCount = wowsCount;
+	}
+
+	@Column(columnDefinition = "int default 0")
+	public int getFeelsCount() {
+		return feelsCount;
+	}
+
+	public void setFeelsCount(int feelsCount) {
+		this.feelsCount = feelsCount;
+	}
+
+	@Column(columnDefinition = "int default 0")
+	public int getMyFavoritesCount() {
+		return myFavoritesCount;
+	}
+
+	public void setMyFavoritesCount(int myFavoritesCount) {
+		this.myFavoritesCount = myFavoritesCount;
+	}
+
+	@Column(columnDefinition = "int default 0")
+	public int getFavoritesMeCount() {
+		return favoritesMeCount;
+	}
+
+	public void setFavoritesMeCount(int favoritesMeCount) {
+		this.favoritesMeCount = favoritesMeCount;
+	}
+
+	public Calendar getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(Calendar createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public Calendar getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(Calendar updatedOn) {
+		this.updatedOn = updatedOn;
+	}
+
+	public void setEmail(String email) {
         this.email = email;
     }
 
