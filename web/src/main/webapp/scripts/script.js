@@ -49,3 +49,20 @@ function confirmMessage(obj) {
     ans = confirm(msg);
     return ans;
 }
+
+
+$("#favoriteUser").click(function(){
+    $.ajax({url: "/mu/favoriteUser?userId=-2", success: function(result){
+        alert("success");
+    }});
+});
+
+function favoriteUser(){
+	$.ajax({
+		type: 'POST',
+		url: '/mu/favoriteUser', 
+		data: 'userId=-2',
+		success: function(result){
+		$('#main-container').html(result);
+    }});
+}

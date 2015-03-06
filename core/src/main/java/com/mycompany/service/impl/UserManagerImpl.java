@@ -1,20 +1,25 @@
 package com.mycompany.service.impl;
 
 import org.apache.commons.lang.StringUtils;
+
 import com.mycompany.dao.UserDao;
 import com.mycompany.model.User;
 import com.mycompany.service.MailEngine;
 import com.mycompany.service.UserExistsException;
 import com.mycompany.service.UserManager;
 import com.mycompany.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.WebService;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -114,7 +119,7 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
 
         if (user.getVersion() == null) {
             // if new user, lowercase userId
-            user.setUsername(user.getUsername().toLowerCase());
+            user.setUsername(user.getEmail());
         }
 
         // Get and prepare password management-related artifacts
@@ -267,5 +272,14 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
         }
         // or throw exception
         return null;
+    }
+
+    public User favoriteUser(String userId) throws UserExistsException{
+    	User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	User favUser = userDao.getUserById(userId);
+    	System.out.println("dav user"+favUser.getId());
+    	user.getMyFavourites().add(favUser);
+    	saveUser(user);
+    	return favUser;
     }
 }

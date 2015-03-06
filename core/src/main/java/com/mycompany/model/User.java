@@ -8,6 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -60,6 +61,8 @@ public class User extends BaseObject implements Serializable, UserDetails {
     private String passwordHint;
     private String firstName;                   // required
     private String lastName;                    // required
+    private String fullName;
+    private String displayName;
     private String email;                       // required; unique
     private String phoneNumber;
     private String website;
@@ -71,11 +74,12 @@ public class User extends BaseObject implements Serializable, UserDetails {
     private boolean accountLocked;
     private boolean credentialsExpired;
     private List<User> myFavourites = new ArrayList<User>();
-    private List<User> favouritesMe = new ArrayList<User>();
+    private List<User> fans = new ArrayList<User>();
     private int wowsCount;
     private int feelsCount;
     private int myFavoritesCount;
     private int favoritesMeCount;
+    private int postCount;
     private Calendar createdOn;
 	private Calendar updatedOn;
 
@@ -127,13 +131,13 @@ public class User extends BaseObject implements Serializable, UserDetails {
         return passwordHint;
     }
 
-    @Column(name = "first_name", nullable = false, length = 50)
+    @Column(name = "first_name", length = 50)
     @Field
     public String getFirstName() {
         return firstName;
     }
 
-    @Column(name = "last_name", nullable = false, length = 50)
+    @Column(name = "last_name", length = 50)
     @Field
     public String getLastName() {
         return lastName;
@@ -161,12 +165,23 @@ public class User extends BaseObject implements Serializable, UserDetails {
      *
      * @return firstName + ' ' + lastName
      */
-    @Transient
     public String getFullName() {
-        return firstName + ' ' + lastName;
+        return fullName;
     }
 
-    @Embedded
+    public void setFullName(String fullName){
+    	this.fullName = fullName;
+    }
+    
+    public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
+	@Embedded
     @IndexedEmbedded
     public Address getAddress() {
         return address;
@@ -302,10 +317,11 @@ public class User extends BaseObject implements Serializable, UserDetails {
         this.lastName = lastName;
     }
 
-	@ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch =FetchType.EAGER)
+    @Fetch(value = FetchMode.SELECT)
     @JoinTable(name="mu_favourites",
-     joinColumns=@JoinColumn(name="person_id"),
-     inverseJoinColumns=@JoinColumn(name="favourite_id")
+     joinColumns=@JoinColumn(name="fan_id"),
+     inverseJoinColumns=@JoinColumn(name="person_id")
     )
     public List<User> getMyFavourites() {
 		return myFavourites;
@@ -315,17 +331,27 @@ public class User extends BaseObject implements Serializable, UserDetails {
 		this.myFavourites = myFavourites;
 	}
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL, fetch =FetchType.EAGER)
+	@Fetch(value = FetchMode.SELECT)
     @JoinTable(name="mu_favourites",
-     joinColumns=@JoinColumn(name="favourite_id"),
-     inverseJoinColumns=@JoinColumn(name="person_id")
+     joinColumns=@JoinColumn(name="person_id"),
+     inverseJoinColumns=@JoinColumn(name="fan_id")
     )
-	public List<User> getFavouritesMe() {
-		return favouritesMe;
+	public List<User> getFans() {
+		return fans;
 	}
 
-	public void setFavouritesMe(List<User> favouritesMe) {
-		this.favouritesMe = favouritesMe;
+	public void setFans(List<User> fans) {
+		this.fans = fans;
+	}
+
+	@Column(columnDefinition = "int default 0")
+	public int getPostCount() {
+		return postCount;
+	}
+
+	public void setPostCount(int postCount) {
+		this.postCount = postCount;
 	}
 
 	@Column(columnDefinition = "int default 0")

@@ -1,11 +1,12 @@
 package com.mycompany.service;
 
-import com.mycompany.dao.UserDao;
-import com.mycompany.model.User;
+import java.util.List;
+
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.List;
+import com.mycompany.dao.UserDao;
+import com.mycompany.model.User;
 
 
 /**
@@ -137,4 +138,6 @@ public interface UserManager extends GenericManager<User, Long> {
      * @throws UserExistsException
      */
     User updatePassword(String username, String currentPassword, String recoveryToken, String newPassword, String applicationUrl) throws UserExistsException;
+    
+    User favoriteUser(String userId) throws UserExistsException;
 }

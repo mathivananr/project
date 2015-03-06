@@ -6,7 +6,10 @@
         <pattern>/resources/*</pattern>
         <pattern>/merchant/*</pattern>
     </excludes> 
-    <decorator name="default" page="default.jsp">
+    <decorator name="admin" page="default.jsp">
         <pattern>/admin*</pattern>
+    </decorator>
+    <decorator name="mu" page="mu.jsp">
+        <pattern>/*</pattern>
     </decorator>
 </decorators>

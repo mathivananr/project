@@ -307,3 +307,15 @@ span.pagelinks {
     border-color: #7be4ca;
     color: #fff;
 }
+
+[contenteditable=true]:empty:before{
+  content: attr(placeholder);
+  display: block; /* For Firefox */
+}
+
+/* */
+
+div[contenteditable=true] {
+  border: 1px #7be4ca solid;
+  padding: 5px;
+}

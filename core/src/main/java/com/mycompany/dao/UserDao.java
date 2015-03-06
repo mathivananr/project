@@ -1,6 +1,7 @@
 package com.mycompany.dao;
 
 import com.mycompany.model.User;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
@@ -46,5 +47,8 @@ public interface UserDao extends GenericDao<User, Long> {
      */
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     String getUserPassword(Long userId);
+    
+    @Transactional
+    User getUserById(String id) throws UsernameNotFoundException;
     
 }

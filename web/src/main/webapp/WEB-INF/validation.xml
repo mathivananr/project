@@ -29,20 +29,11 @@
             </field>
         </form>
         <form name="user">
-            <field property="username" depends="required">
-                <arg key="user.username"/>
-            </field>
-            <field property="firstName" depends="required">
-                <arg key="user.firstName"/>
-            </field>
-            <field property="lastName" depends="required">
-                <arg key="user.lastName"/>
-            </field>
             <field property="email" depends="required,email">
                 <arg key="user.email"/>
             </field>
-            <field property="passwordHint" depends="required">
-                <arg key="user.passwordHint"/>
+             <field property="password" depends="required">
+                <arg key="user.password"/>
             </field>
         </form>
         <form name="signup" extends="user">

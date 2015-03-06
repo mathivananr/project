@@ -2,6 +2,7 @@ package com.mycompany.dao.hibernate;
 
 import com.mycompany.dao.UserDao;
 import com.mycompany.model.User;
+
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
@@ -10,9 +11,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Table;
+
 import java.util.List;
+
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -86,6 +91,24 @@ public class UserDaoHibernate extends GenericDaoHibernate<User, Long> implements
         }
     }
 
+    /**
+     * {@inheritDoc}
+    */
+    public User getUserById(String id) throws UsernameNotFoundException {
+    	Long userId = Long.parseLong(id);
+        List users = getSession().createCriteria(User.class).add(Restrictions.eq("id", userId)).list();
+        if (users == null || users.isEmpty()) {
+            throw new UsernameNotFoundException("user '" + id + "' not found...");
+        } else {
+        	User user = (User) users.get(0);
+        	List<User> myFavorites = user.getMyFavourites();
+        	for(User myFavoriteUser : myFavorites){
+        		System.out.println(myFavoriteUser.getEmail());
+        	}
+            return user;
+        }
+    }
+    
     /**
      * {@inheritDoc}
     */

@@ -6,6 +6,8 @@
 
 <hibernate-configuration>
     <session-factory>
+    	<property name="show_sql">false</property>
+    	<property name="format_sql">false</property>
         <mapping class="com.mycompany.model.User"/>
         <mapping class="com.mycompany.model.Role"/>
         <mapping class="com.mycompany.model.Offer"/>

@@ -30,7 +30,7 @@ public class OfferController extends BaseFormController {
 	private OfferManager offerManager;
 
 	public OfferController() {
-		setCancelView("redirect:/home");
+		setCancelView("redirect:/index");
 		setSuccessView("redirect:/offers");
 	}
 
