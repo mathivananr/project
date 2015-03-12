@@ -1,6 +1,7 @@
 package com.mycompany.service.impl;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.Hibernate;
 
 import com.mycompany.dao.UserDao;
 import com.mycompany.model.User;
@@ -273,11 +274,12 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
         // or throw exception
         return null;
     }
-
+    
     public User favoriteUser(String userId) throws UserExistsException{
     	User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	User favUser = userDao.getUserById(userId);
     	System.out.println("dav user"+favUser.getId());
+    	System.out.println("size=========="+user.getMyFavourites().size());
     	user.getMyFavourites().add(favUser);
     	saveUser(user);
     	return favUser;

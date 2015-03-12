@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -91,23 +92,31 @@ public class UserDaoHibernate extends GenericDaoHibernate<User, Long> implements
         }
     }
 
-    /**
-     * {@inheritDoc}
-    */
-    public User getUserById(String id) throws UsernameNotFoundException {
-    	Long userId = Long.parseLong(id);
-        List users = getSession().createCriteria(User.class).add(Restrictions.eq("id", userId)).list();
-        if (users == null || users.isEmpty()) {
-            throw new UsernameNotFoundException("user '" + id + "' not found...");
-        } else {
-        	User user = (User) users.get(0);
-        	List<User> myFavorites = user.getMyFavourites();
-        	for(User myFavoriteUser : myFavorites){
-        		System.out.println(myFavoriteUser.getEmail());
-        	}
-            return user;
-        }
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	public User getUserById(String id) throws UsernameNotFoundException {
+		Long userId = Long.parseLong(id);
+		try {
+			List users = getSession().createCriteria(User.class)
+					.add(Restrictions.eq("id", userId)).list();
+			if (users == null || users.isEmpty()) {
+				throw new UsernameNotFoundException("user '" + id
+						+ "' not found...");
+			} else {
+				User user = (User) users.get(0);
+				/*User profile = user;
+				System.out.println("user id=========" + user.getId()
+						+ "size  =====  " + user.getMyFavourites().size());
+				profile.setMyFavourites(user.getMyFavourites());
+				profile.setFans(user.getFans());*/
+				return user;
+			}
+		} catch (HibernateException he) {
+			he.printStackTrace();
+			return null;
+		}
+	}
     
     /**
      * {@inheritDoc}

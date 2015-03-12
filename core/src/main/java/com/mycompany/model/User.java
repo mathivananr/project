@@ -77,8 +77,8 @@ public class User extends BaseObject implements Serializable, UserDetails {
     private List<User> fans = new ArrayList<User>();
     private int wowsCount;
     private int feelsCount;
-    private int myFavoritesCount;
-    private int favoritesMeCount;
+    private int myFavouritesCount;
+    private int fansCount;
     private int postCount;
     private Calendar createdOn;
 	private Calendar updatedOn;
@@ -317,8 +317,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
         this.lastName = lastName;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch =FetchType.EAGER)
-    @Fetch(value = FetchMode.SELECT)
+    @ManyToMany(cascade = CascadeType.ALL, fetch =FetchType.LAZY)
     @JoinTable(name="mu_favourites",
      joinColumns=@JoinColumn(name="fan_id"),
      inverseJoinColumns=@JoinColumn(name="person_id")
@@ -331,8 +330,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
 		this.myFavourites = myFavourites;
 	}
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch =FetchType.EAGER)
-	@Fetch(value = FetchMode.SELECT)
+	@ManyToMany(cascade = CascadeType.ALL, fetch =FetchType.LAZY)
     @JoinTable(name="mu_favourites",
      joinColumns=@JoinColumn(name="person_id"),
      inverseJoinColumns=@JoinColumn(name="fan_id")
@@ -373,21 +371,21 @@ public class User extends BaseObject implements Serializable, UserDetails {
 	}
 
 	@Column(columnDefinition = "int default 0")
-	public int getMyFavoritesCount() {
-		return myFavoritesCount;
+	public int getMyFavouritesCount() {
+		return myFavouritesCount;
 	}
 
-	public void setMyFavoritesCount(int myFavoritesCount) {
-		this.myFavoritesCount = myFavoritesCount;
+	public void setMyFavouritesCount(int myFavouritesCount) {
+		this.myFavouritesCount = myFavouritesCount;
 	}
 
 	@Column(columnDefinition = "int default 0")
-	public int getFavoritesMeCount() {
-		return favoritesMeCount;
+	public int getFansCount() {
+		return fansCount;
 	}
 
-	public void setFavoritesMeCount(int favoritesMeCount) {
-		this.favoritesMeCount = favoritesMeCount;
+	public void setFansCount(int fansCount) {
+		this.fansCount = fansCount;
 	}
 
 	public Calendar getCreatedOn() {
